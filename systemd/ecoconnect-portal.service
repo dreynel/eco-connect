@@ -1,0 +1,16 @@
+[Unit]
+Description=EcoConnect Portal
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+WorkingDirectory=/home/darkel/eco-con
+Environment=ECOCON_ADMIN_USERNAME=admin
+Environment=ECOCON_ADMIN_PASSWORD=change-this-password
+ExecStart=/home/darkel/venv/bin/python3 -m uvicorn portal:app --host 0.0.0.0 --port 8080
+Restart=always
+RestartSec=3
+User=darkel
+
+[Install]
+WantedBy=multi-user.target

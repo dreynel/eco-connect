@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EcoConnect Portal</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="univ-header-card">
+        <div class="logo-container">
+          <img src="/static/isatu.png" alt="ISATU Logo" class="logo">
+        </div>
+        <div class="brand-text">
+          <h1>ISATU EcoConnect</h1>
+          <p class="brand-sub">Iloilo Science and Technology University - Dumangas Campus</p>
+        </div>
+      </header>
+
+      <section class="status-panel is-hidden" id="statusPanel" aria-live="polite">
+        <div class="status-header">
+          <div>
+            <p class="eyebrow">EcoConnect</p>
+            <h1>Internet Access</h1>
+          </div>
+          <div class="timer-block">
+            <span class="timer-label">Remaining</span>
+            <strong id="remainingTime">00:00</strong>
+            <span class="connection-state" id="connectionState">Paused</span>
+          </div>
+        </div>
+        <div class="status-details is-hidden" id="statusDetails">
+          <div class="detail-item">
+            <span class="detail-label">Expiration Time</span>
+            <strong id="expirationTime">--:--:--</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="connection-actions is-hidden" id="connectionActions" aria-label="Connection controls">
+        <button class="connect-button" id="connectButton" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+            <line x1="12" y1="20" x2="12.01" y2="20" stroke-width="3"></line>
+          </svg>
+          Connect to the internet
+        </button>
+        <div class="control-row">
+          <button class="pause-button" id="pauseButton" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+            Pause time
+          </button>
+          <button class="reset-button" id="resetButton" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+              <polyline points="3 3 3 8 8 8"></polyline>
+            </svg>
+            Reset time
+          </button>
+        </div>
+      </section>
+
+      <section class="actions" aria-label="Portal actions">
+        <button class="action-button" id="insertButton" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+          Insert Recyclables
+        </button>
+        <button class="action-button" id="ratesButton" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          Check Rates
+        </button>
+      </section>
+
+      <section class="panel is-hidden" id="insertPanel">
+        <div class="material-switch" role="tablist" aria-label="Material type">
+          <button class="material-button is-active" type="button" data-material="plastic_bottle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+              <path d="M10 2h4v3h-4zM8 9a4 4 0 0 1 4-4h0a4 4 0 0 1 4 4v11a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2zM9 9h6M9 13h6M9 17h6"/>
+            </svg>
+            Plastic Bottle
+          </button>
+          <button class="material-button" type="button" data-material="metal_can">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+              <ellipse cx="12" cy="5" rx="5" ry="2.5"/>
+              <path d="M7 5v14c0 1.38 2.24 2.5 5 2.5s5-1.12 5-2.5V5"/>
+              <ellipse cx="12" cy="19" rx="5" ry="2.5"/>
+            </svg>
+            Metal Can
+          </button>
+        </div>
+
+        <div class="size-grid" id="sizeGrid" aria-label="Material size choices"></div>
+        <div style="margin-top: 20px; display: flex; justify-content: center;">
+          <button class="pause-button" id="cancelInsertButton" type="button" style="padding: 0 24px; min-height: 44px;">Cancel Insertion</button>
+        </div>
+        <p class="notice" id="topupNotice" aria-live="polite"></p>
+      </section>
+
+      <section class="panel is-hidden" id="ratesPanel">
+        <div class="rates-grid" id="ratesGrid"></div>
+      </section>
+
+      <footer class="portal-footer">
+        <p>© 2026 Iloilo Science and Technology University - Dumangas Campus</p>
+        <p class="footer-sub">EcoConnect Captive System • Campus Wi-Fi Access Hub</p>
+      </footer>
+    </main>
+
+    <!-- Toast Notifications -->
+    <div class="toast" id="connectionToast" role="alert" aria-live="assertive">
+      <div class="toast-title" id="toastTitle"></div>
+      <div class="toast-desc" id="toastDesc"></div>
+      <div id="toastActionContainer"></div>
+    </div>
+
+    <div class="toast" id="materialToast" role="alert" aria-live="polite">
+      <div class="toast-title" id="materialToastTitle">♻️ Material Detected</div>
+      <div class="toast-desc" id="materialToastDesc"></div>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div class="modal-backdrop is-hidden" id="confirmModal">
+      <div class="modal">
+        <div class="modal-title">⚠️ Reset Session Time</div>
+        <div class="modal-desc">
+          Are you sure you want to reset your remaining time balance to 0? This will disconnect you from the internet.
+        </div>
+        <div class="modal-actions">
+          <button class="modal-btn modal-cancel" id="confirmCancelBtn" type="button">Cancel</button>
+          <button class="modal-btn modal-ok" id="confirmOkBtn" type="button">Yes, Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

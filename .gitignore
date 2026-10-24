@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+portal.db
+*.sqlite
+*.sqlite3
+.tmp/

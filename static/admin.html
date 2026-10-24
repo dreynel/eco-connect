@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EcoConnect Admin</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="admin-header">
+        <div>
+          <p class="eyebrow">EcoConnect</p>
+          <h1>Admin Dashboard</h1>
+        </div>
+        <button class="admin-logout is-hidden" id="logoutButton" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          Logout
+        </button>
+      </section>
+
+      <section class="admin-login panel" id="loginPanel">
+        <form id="loginForm">
+          <label>
+            Username
+            <input autocomplete="username" id="usernameInput" name="username" placeholder="Enter username" required />
+          </label>
+          <label>
+            Password
+            <input
+              autocomplete="current-password"
+              id="passwordInput"
+              name="password"
+              placeholder="Enter password"
+              required
+              type="password"
+            />
+          </label>
+          <button class="connect-button" type="submit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Login to Dashboard
+          </button>
+          <p class="notice" id="loginNotice" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="admin-dashboard is-hidden" id="dashboardPanel">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav">
+          <button id="sidebarToggle" class="sidebar-toggle" aria-label="Toggle Menu" type="button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="mobile-title">EcoConnect Admin</div>
+        </header>
+
+        <div class="dashboard-layout">
+          <!-- Sidebar -->
+          <aside class="sidebar" id="sidebarMenu">
+            <div class="sidebar-brand">
+              <span>ECOCONNECT</span>
+              <small>Admin Portal</small>
+            </div>
+            <nav class="sidebar-nav">
+              <button class="nav-item active" data-tab="tab-overview" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="9"></rect>
+                  <rect x="14" y="3" width="7" height="5"></rect>
+                  <rect x="14" y="12" width="7" height="9"></rect>
+                  <rect x="3" y="16" width="7" height="5"></rect>
+                </svg>
+                Overview
+              </button>
+              <button class="nav-item" data-tab="tab-analytics" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                Analytics
+              </button>
+              <button class="nav-item" data-tab="tab-settings" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                Settings
+              </button>
+            </nav>
+            <button class="sidebar-logout nav-item" id="sidebarLogoutBtn" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              Logout
+            </button>
+          </aside>
+
+          <!-- Sidebar overlay for mobile -->
+          <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+          <!-- Main Content -->
+          <main class="dashboard-main">
+            <!-- Header for Desktop -->
+            <header class="dashboard-header">
+              <div class="header-left">
+                <h1>Admin Dashboard</h1>
+                <p class="header-subtitle" id="currentTabTitle">Overview</p>
+              </div>
+              <div class="header-actions">
+                <button class="action-button compact-button" id="refreshButton" type="button">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                  </svg>
+                  Refresh Data
+                </button>
+              </div>
+            </header>
+
+            <div class="tab-content-container">
+              <!-- Overview Tab -->
+              <div class="tab-pane active" id="tab-overview">
+                <div class="admin-stats" id="statsGrid"></div>
+                
+                <div class="tab-split-grid">
+                  <section class="panel">
+                    <div class="admin-section-title">
+                      <h2>Client Sessions</h2>
+                    </div>
+                    <div class="admin-table-wrap">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Client IP</th>
+                            <th>Status</th>
+                            <th>Remaining Time</th>
+                          </tr>
+                        </thead>
+                        <tbody id="sessionsBody"></tbody>
+                      </table>
+                    </div>
+                  </section>
+
+                  <section class="panel">
+                    <div class="admin-section-title">
+                      <h2>Recent Insertions</h2>
+                    </div>
+                    <div class="admin-table-wrap">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Time</th>
+                            <th>Client</th>
+                            <th>Material</th>
+                            <th>Size</th>
+                            <th>Added</th>
+                          </tr>
+                        </thead>
+                        <tbody id="recentBody"></tbody>
+                      </table>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
+              <!-- Analytics Tab -->
+              <div class="tab-pane" id="tab-analytics">
+                <section class="panel">
+                  <div class="admin-section-title">
+                    <h2>Inserted Materials</h2>
+                  </div>
+                  <div class="admin-table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Material</th>
+                          <th>Size</th>
+                          <th>Count</th>
+                          <th>Minutes</th>
+                        </tr>
+                      </thead>
+                      <tbody id="breakdownBody"></tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+
+              <!-- Settings Tab -->
+              <div class="tab-pane" id="tab-settings">
+                <section class="panel">
+                  <div class="admin-section-title">
+                    <h2>System Settings</h2>
+                  </div>
+                  <div class="settings-grid">
+                    <div class="settings-card">
+                      <h3>Time Allotment (Minutes)</h3>
+                      <form id="ratesForm">
+                        <div class="rates-inputs-grid">
+                          <div class="rate-group">
+                            <h4>Plastic Bottle</h4>
+                            <label>
+                              Small
+                              <input type="number" id="rate_plastic_bottle_small" name="plastic_bottle_small" min="0" required />
+                            </label>
+                            <label>
+                              Medium
+                              <input type="number" id="rate_plastic_bottle_medium" name="plastic_bottle_medium" min="0" required />
+                            </label>
+                            <label>
+                              Large
+                              <input type="number" id="rate_plastic_bottle_large" name="plastic_bottle_large" min="0" required />
+                            </label>
+                          </div>
+                          <div class="rate-group">
+                            <h4>Metal Can</h4>
+                            <label>
+                              Small
+                              <input type="number" id="rate_metal_can_small" name="metal_can_small" min="0" required />
+                            </label>
+                            <label>
+                              Medium
+                              <input type="number" id="rate_metal_can_medium" name="metal_can_medium" min="0" required />
+                            </label>
+                            <label>
+                              Large
+                              <input type="number" id="rate_metal_can_large" name="metal_can_large" min="0" required />
+                            </label>
+                          </div>
+                        </div>
+                        <button class="connect-button compact-button" type="submit" style="margin-top: 16px; min-height: 40px;">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                          </svg>
+                          Save Rates
+                        </button>
+                      </form>
+                    </div>
+
+                    <div class="settings-column">
+                      <div class="settings-card blacklist-card">
+                        <h3>Blocked Sites</h3>
+                        <form id="blacklistForm" class="blacklist-form">
+                          <input type="text" id="blacklistInput" placeholder="e.g. facebook.com" required />
+                          <button type="submit" class="connect-button compact-button" style="min-height: 40px; min-width: 80px;">Block</button>
+                        </form>
+                        <div class="blacklist-list-container">
+                          <ul id="blacklistList" class="blacklist-list"></ul>
+                        </div>
+                      </div>
+
+                      <div class="settings-card reset-card">
+                        <h3>System Maintenance</h3>
+                        <p>Wipes out all statistical data, insertion histories, and active user sessions. Active clients will be disconnected immediately.</p>
+                        <button class="reset-button compact-button" id="resetDashboardBtn" type="button" style="min-height: 40px;">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                          </svg>
+                          Reset Dashboard Data
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </main>
+        </div>
+      </section>
+    </main>
+
+    <!-- Reset Dashboard Confirmation Modal -->
+    <div class="modal-backdrop is-hidden" id="resetModal">
+      <div class="modal">
+        <div class="modal-title">⚠️ Reset Dashboard Data</div>
+        <div class="modal-desc">
+          Are you sure you want to reset all dashboard data? This will permanently delete all transaction logs, statistics, and active client sessions. This action cannot be undone.
+        </div>
+        <div class="modal-actions">
+          <button class="modal-btn modal-cancel" id="resetCancelBtn" type="button">Cancel</button>
+          <button class="modal-btn modal-ok" id="resetOkBtn" type="button">Yes, Reset All</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/admin.js"></script>
+  </body>
+</html>

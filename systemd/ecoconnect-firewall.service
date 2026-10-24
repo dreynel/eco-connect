@@ -1,0 +1,14 @@
+[Unit]
+Description=EcoConnect Internet Gate
+After=network-online.target ecoconnect-portal.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/darkel/eco-con
+ExecStart=/usr/bin/python3 /home/darkel/eco-con/firewall_controller.py --db /home/darkel/eco-con/portal.db --lan-interface end0 --upstream-interface wlx503eaa767bbe --poll-seconds 0.25
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
